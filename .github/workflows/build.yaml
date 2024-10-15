@@ -1,0 +1,40 @@
+name: Basic CI/CD Pipeline
+
+# Trigger the workflow on push or pull request to master or main branch
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+# Define the jobs that will be run in the pipeline
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js (or any environment)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # Step 3: Install dependencies (if you have package.json, otherwise skip)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests (you can replace this with any command)
+      - name: Run tests
+        run: echo "Running tests..."
+
+      # Step 5: Optionally deploy (for learning, just log)
+      - name: Deploy (example)
+        run: echo "Deploying to production..."
