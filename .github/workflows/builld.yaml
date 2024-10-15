@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js (Assuming a Node.js environment, adjust as necessary)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      # Step 3: Install dependencies (assuming package.json exists)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests (if there are any, can be skipped for an empty project)
+      - name: Run tests
+        run: npm test
+
+      # Step 5: Build (optional, if the project requires building)
+      - name: Build project
+        run: npm run build
